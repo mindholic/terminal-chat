@@ -8,8 +8,8 @@
 int pip;
 
 void escrever() {
-    
-    char* mychat = "/home/galhardo/Documents/so/trash/gajofifo";
+
+    char* mychat = "/home/galhardo/Documents/so/trash/user2fifo";
 
     mkfifo(mychat, 0666);
 
@@ -18,16 +18,17 @@ void escrever() {
     pip = open(mychat, O_WRONLY);
 
     while (1) {
+        
         fgets(wr, 80, stdin);
         write(pip, wr, strlen(wr) + 1);
     }
 }
 
 void ler() {
-    
-    char* mychat = "/home/galhardo/Documents/so/trash/gajafifo";
+    char* mychat = "/home/galhardo/Documents/so/trash/user1fifo";
+
     char rd[80] = "", alreadyRead[80] = "";
-    
+
     
     while (1) {
         pip = open(mychat, O_RDONLY);
@@ -35,7 +36,7 @@ void ler() {
         if (strcmp(rd, alreadyRead) != 0) 
         {
             strcpy(alreadyRead, rd);
-            printf("Ela: %s", rd);
+            printf("%s", rd);
         }
     }
     
